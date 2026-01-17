@@ -14,9 +14,15 @@ const Resources = () => {
       <ul>
         {resources.map((r) => (
           <li key={r.id}>
-            <a href={`http://localhost:8080${r.pdfUrl}`} target="_blank">
+            <a
+              href={r.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "lightblue" }}
+            >
               {r.subject} — {r.chapterName}
             </a>
+
           </li>
         ))}
       </ul>

@@ -90,9 +90,14 @@ const AdminResources = () => {
         {resources.map((r) => (
           <li key={r.id}>
             {r.subject} – {r.chapterName}{" "}
-            <a href={r.pdfUrl} target="_blank" rel="noreferrer">
-              PDF
-            </a>{" "}
+            <a
+              href={r.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "lightblue" }}
+            >
+              View PDF
+            </a>
             <button onClick={() => handleDelete(r.id)}>❌</button>
           </li>
         ))}
