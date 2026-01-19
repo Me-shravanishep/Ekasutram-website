@@ -1,30 +1,13 @@
 import "./About.css";
-import { useRef } from "react";
-
-const symbols = ["∑","π","∞","√","∫","Δ","θ","λ","Ω","∂","∇"];
+import MathBackground from "../components/MathBackground";
+import Navbar from "../components/Navbar";
 
 export default function About() {
-  const symbolRefs = useRef<(HTMLSpanElement | null)[]>([]);
-
   return (
     <section className="about-page">
-      {/* Floating Math Symbols */}
-      <div className="about-floating-math">
-        {symbols.map((s, i) => (
-          <span
-            key={i}
-            ref={(el) => { symbolRefs.current[i] = el; }}
-            className="about-float-symbol"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.6}s`
-            }}
-          >
-            {s}
-          </span>
-        ))}
-      </div>
+      <Navbar />
+      {/* Mathematical Background Pattern - Canvas */}
+      <MathBackground />
 
       {/* Main Content */}
       <div className="about-container">

@@ -1,5 +1,7 @@
 import "./Team.css";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import MathBackground from "../components/MathBackground";
+import Navbar from "../components/Navbar";
 
 type Member = {
   name: string;
@@ -16,63 +18,14 @@ const teamMembers: Member[] = [
   { name: "Rahul Mehta", role: "AI Specialist", bio: "ML systems and intelligent solutions." }
 ];
 
-const symbols = ["∑","π","∞","√","∫","Δ","θ","λ","Ω","≠","≈","∂","∇"];
-
 export default function Team() {
   const [active, setActive] = useState<Member | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const symbolRefs = useRef<(HTMLSpanElement | null)[]>([]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  const getSymbolTransform = (index: number) => {
-    const symbolEl = symbolRefs.current[index];
-    if (!symbolEl) return '';
-    
-    const rect = symbolEl.getBoundingClientRect();
-    const symbolX = rect.left + rect.width / 2;
-    const symbolY = rect.top + rect.height / 2;
-    
-    const distX = symbolX - mousePos.x;
-    const distY = symbolY - mousePos.y;
-    const distance = Math.sqrt(distX * distX + distY * distY);
-    
-    const repelRadius = 150;
-    if (distance < repelRadius && distance > 0) {
-      const force = (repelRadius - distance) / repelRadius;
-      const moveX = (distX / distance) * force * 60;
-      const moveY = (distY / distance) * force * 60;
-      return `translate(${moveX}px, ${moveY}px)`;
-    }
-    return '';
-  };
 
   return (
     <section className="team-page">
-      <div className="floating-math">
-        {symbols.map((s, i) => (
-          <span
-            key={i}
-            ref={el => { symbolRefs.current[i] = el; }}
-            className="float-symbol"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              transform: getSymbolTransform(i),
-              transition: 'transform 0.3s ease-out'
-            }}
-          >
-            {s}
-          </span>
-        ))}
-      </div>
+      <Navbar />
+      {/* Mathematical Background Pattern - Canvas */}
+      <MathBackground />
 
       <div className="team-container">
         <h1 className="team-heading">Our Team</h1>
