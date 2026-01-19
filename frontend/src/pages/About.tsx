@@ -1,4 +1,4 @@
-import "./About.css";
+import "../styles/About.css";
 import MathBackground from "../components/MathBackground";
 import Navbar from "../components/Navbar";
 

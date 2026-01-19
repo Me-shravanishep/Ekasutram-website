@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import MathBackground from "../components/MathBackground";
 import Navbar from "../components/Navbar";
-import "./Events.css";
+import "../styles/Events.css";
 
 const Events = () => {
   useEffect(() => {

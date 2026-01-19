@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { getResources } from "../services/api";
-import "./Resources.css";
+import "../styles/Resources.css";
 
 interface Resource {
   id: number;

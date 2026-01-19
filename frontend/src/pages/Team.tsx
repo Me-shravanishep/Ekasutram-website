@@ -1,4 +1,4 @@
-import "./Team.css";
+import "../styles/Team.css";
 import { useState } from "react";
 import MathBackground from "../components/MathBackground";
 import Navbar from "../components/Navbar";

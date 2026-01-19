@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import "../styles/Home.css";
 import MathBackground from "../components/MathBackground";
 import Navbar from "../components/Navbar";
 
@@ -33,7 +33,7 @@ const Home = () => {
         <div className="hero-glow"></div>
         <div className="hero-content">
           <div className="logo-accent">
-            <span className="epsilon-symbol">Ε</span>
+            <span className="epsilon-symbol">€</span>
           </div>
           <h1 className="hero-title">EKASUTRAM</h1>
           <p className="hero-subtitle">The Official Mathematics Club</p>
