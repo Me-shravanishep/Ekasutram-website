@@ -21,31 +21,24 @@ const Resources = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Extract unique topics (formerly subjects)
+  // Extract unique topics from real data only
   const topics = useMemo(() => {
     const allTopics = resources.map((r) => r.subject);
     return ["All", ...new Set(allTopics)].filter(Boolean);
   }, [resources]);
 
-  // Filter resources
+  // Filter resources based on selection
   const filteredResources = useMemo(() => {
     if (selectedTopic === "All") return resources;
     return resources.filter((r) => r.subject === selectedTopic);
   }, [resources, selectedTopic]);
-
-  // Dummy Templates/Clipcharts
-  const dummyTemplates = [
-    { id: 101, title: "Graph Paper Template (A4)", type: "PDF" },
-    { id: 102, title: "Calculus Formula Sheet", type: "Keynote" },
-    { id: 103, title: "Geometry Construction Kit", type: "SVG" },
-  ];
 
   return (
     <div className="resources-container">
       {/* Sidebar */}
       <aside className="resources-sidebar">
         <div className="sidebar-header">
-          <h2>Categories</h2> 
+          <h2>Categories</h2>
         </div>
         <ul className="subject-list">
           {topics.map((topic) => (
@@ -63,15 +56,7 @@ const Resources = () => {
               </button>
             </li>
           ))}
-          <li className="subject-item">
-            <button
-              className={`subject-btn ${selectedTopic === "Templates" ? "active" : ""}`}
-              onClick={() => setSelectedTopic("Templates")}
-            >
-              Templates & Tools
-              <span className="subject-count">{dummyTemplates.length}</span>
-            </button>
-          </li>
+          {/* Removed the hardcoded Templates & Tools <li> here */}
         </ul>
       </aside>
 
@@ -86,35 +71,25 @@ const Resources = () => {
           <div className="loading-spinner">Loading resources...</div>
         ) : (
           <div className="resources-grid">
-            {selectedTopic === "Templates" ? (
-              dummyTemplates.map(t => (
-                <div key={t.id} className="resource-card">
-                  <div className="resource-icon">📐</div>
-                  <div className="resource-subject">{t.type}</div>
-                  <h3 className="resource-title">{t.title}</h3>
-                  <button className="resource-link">Download <span className="external-icon">⬇</span></button>
-                </div>
-              ))
-            ) : (
-              filteredResources.map((r) => (
-                <div key={r.id} className="resource-card">
-                  <div className="resource-icon">📚</div>
-                  <div className="resource-subject">{r.subject}</div>
-                  <h3 className="resource-title">{r.chapterName}</h3>
-                  <a
-                    href={r.pdfUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="resource-link"
-                  >
-                    Download PDF
-                    <span className="external-icon">↗</span>
-                  </a>
-                </div>
-              ))
-            )}
+            {/* Removed the conditional Templates mapping */}
+            {filteredResources.map((r) => (
+              <div key={r.id} className="resource-card">
+                <div className="resource-icon">📚</div>
+                <div className="resource-subject">{r.subject}</div>
+                <h3 className="resource-title">{r.chapterName}</h3>
+                <a
+                  href={r.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="resource-link"
+                >
+                  Download PDF
+                  <span className="external-icon">↗</span>
+                </a>
+              </div>
+            ))}
 
-            {selectedTopic !== "Templates" && filteredResources.length === 0 && (
+            {filteredResources.length === 0 && (
               <div className="no-results">No resources found.</div>
             )}
           </div>

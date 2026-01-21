@@ -106,3 +106,10 @@
     font-size: 0.85rem;
   }
 }
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
